@@ -7,6 +7,42 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+# Getting started
+
+## Installation
+
+Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/5.4/installation#installation)
+
+Alternative installation is possible without local dependencies relying on [Docker](#docker). 
+
+Clone the repository
+
+    git clone https://github.com/ashirmuneer/event-management.git
+    
+    Switch to the repo folder
+
+    cd event-management
+Install all the dependencies using composer
+
+    composer install
+
+Copy the example env file and make the required configuration changes in the .env file
+
+    cp .env.example .env
+
+Generate a new application key
+
+    php artisan key:generate
+    
+    Run the database migrations (**Set the database connection in .env before migrating**)
+    and change  BROADCAST_DRIVER=log to BROADCAST_DRIVER=pusher in .env file
+
+    php artisan migrate
+    
+After that run a command to authenticate api 
+ 
+  php artisan passport:install
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
