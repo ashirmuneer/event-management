@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class LoginController extends Controller
 {
     //
@@ -36,7 +37,12 @@ class LoginController extends Controller
 
             if (auth()->attempt($data)) {
                 $token = auth()->user()->createToken('GamerOnTheMove'.$request->email)->accessToken;
-                return response()->json(['token' => $token], 200);
+
+                $response['user'] = auth()->user();
+                $response['notification_count'] = auth()->user();
+                $response['token'] = $token;
+
+                return response()->json(['data' => $response], 200);
             } else {
                 return response()->json(['error' => 'Unauthorised'], 401);
             }
@@ -50,6 +56,31 @@ class LoginController extends Controller
 
             return response()->json($response,500);
         }
+
+
+    }
+
+    public function logout(Request $request){
+
+        try{
+        $accessToken = auth()->user()->token();
+        $refreshToken = DB::table('oauth_refresh_tokens')
+            ->where('access_token_id', $accessToken->id)
+            ->update([
+                'revoked' => true
+            ]);
+        $accessToken->revoke();
+
+        $response['code'] = 2;
+        $response['message'] = 'Logged out successfully';
+        return response()->json($response,200);
+
+    } catch (\Illuminate\Database\QueryException $e) {
+        $response['code'] = 3;
+        $response['message'] = 'something went wrong, please try again';
+
+        return response()->json($response,500);
+    }
 
 
     }

@@ -46,6 +46,7 @@ class RegisterController extends Controller
             'email' => 'required|email|unique:users',
             'user_type' => 'required',
             'password' => 'required|min:6',
+            'company_name' => 'required_if:user_type,2'
         ]);
 
         if ($validator->fails()) {
@@ -61,6 +62,7 @@ class RegisterController extends Controller
        $user->email =  $request->email;
        $user->password =  bcrypt($request->password);
        $user->user_type =  $request->user_type;
+       $user->company_name = $request->company_name;
        $user->save();
 
        $token = $user->createToken('GamerOnTheMove'.$request->email)->accessToken;
