@@ -39,8 +39,9 @@ Generate a new application key
 
     php artisan migrate
     
-After that run a command to authenticate api 
+After that run a command for passport
  
+  
   php artisan passport:install
 
 ## About Laravel
