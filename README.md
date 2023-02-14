@@ -40,6 +40,29 @@ Generate a new application key
     PUSHER_APP_ID=1553508
     PUSHER_APP_KEY=62f82c56f5ff3b333724
     PUSHER_APP_SECRET=76d6426e7c4557b0c5bb
+    
+    
+    also change 
+    
+    MAIL_MAILER=smtp
+    MAIL_HOST=mailhog
+    MAIL_PORT=1025
+    MAIL_USERNAME=null
+    MAIL_PASSWORD=null
+    MAIL_ENCRYPTION=null
+    MAIL_FROM_ADDRESS=null
+    MAIL_FROM_NAME="${APP_NAME}"
+    
+    to change this SMTP mail configuration
+    
+    MAIL_MAILER=smtp
+    MAIL_HOST=smtp.mailtrap.io
+    MAIL_PORT=2525
+    MAIL_USERNAME=44e39d837f5a78
+    MAIL_PASSWORD=82b2c8f99e226d
+    MAIL_ENCRYPTION=tls
+    MAIL_FROM_ADDRESS=testdeveloper2233@gmail.com
+    MAIL_FROM_NAME="${APP_NAME}"
 
     php artisan migrate
     
