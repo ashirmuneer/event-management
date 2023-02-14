@@ -35,6 +35,12 @@ Generate a new application key
     Run the database migrations (**Set the database connection in .env before migrating**)
     and change  BROADCAST_DRIVER=log to BROADCAST_DRIVER=pusher in .env file
 
+    please add pusher credentails in .evn
+
+    PUSHER_APP_ID=1553508
+    PUSHER_APP_KEY=62f82c56f5ff3b333724
+    PUSHER_APP_SECRET=76d6426e7c4557b0c5bb
+
     php artisan migrate
     
 After that run a command for passport dependency
