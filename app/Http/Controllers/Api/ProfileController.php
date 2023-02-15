@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Notifications;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,33 +33,14 @@ class ProfileController extends Controller
 
     }
 
-    public function user_profile_update(Request $request){
+    public function user_profile_update(ProfileUpdateRequest $request){
 
         try{
-            $validator =   Validator::make($request->all(), [
-                'email' => 'required|email',
-                'name' => 'required',
-                'company_name' => 'required_if:user_type,2'
-            ]);
 
-            if ($validator->fails()) {
-
-                $response['code'] = 1;
-                $response['error'] = $validator->errors()->first();
-                return response()->json($response,500);
-            }
 
             $user_id  = auth()->user()->id;
 
-          $user_email_exist = User::where('email','=',$request->email)->where('id','!=',$user_id)->first();
 
-          if($user_email_exist != null){
-
-            $response['code'] = 1;
-            $response['error'] = "email already taken";
-            return response()->json($response,500);
-
-          }
 
            $user = User::where('id','=',$user_id)->first();
 

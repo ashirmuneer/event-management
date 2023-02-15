@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\MyEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EventRequest;
 use Illuminate\Http\Request;
 use App\Models\Events;
 use Illuminate\Support\Facades\Auth;
@@ -122,27 +123,13 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
         //
 
         try{
 
 
-
-            $validator =   Validator::make($request->all(), [
-                'title' => 'required|unique:events',
-                'date_time' => 'required',
-                'description' => 'required',
-                'location' => 'required'
-            ]);
-
-            if ($validator->fails()) {
-
-                $response['code'] = 1;
-                $response['error'] = $validator->errors()->first();
-                return response()->json($response,500);
-            }
 
 
 
@@ -262,26 +249,11 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EventRequest $request, $id)
     {
         //
 
         try{
-
-
-            $validator =   Validator::make($request->all(), [
-                'title' => 'required|unique:events,title,'.$id,
-                'date_time' => 'required',
-                'description' => 'required',
-                'location' => 'required'
-            ]);
-
-            if ($validator->fails()) {
-
-                $response['code'] = 1;
-                $response['error'] = $validator->errors()->first();
-                return response()->json($response,500);
-            }
 
             $events  =  Events::find($id);
             if($events == null){

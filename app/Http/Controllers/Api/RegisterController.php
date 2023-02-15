@@ -11,7 +11,7 @@ use App\Http\Requests\RegistrationRequest;
 class RegisterController extends Controller
 {
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -44,10 +44,10 @@ class RegisterController extends Controller
 
         try {
 
-         
-   
 
-        
+
+
+
 
 
 
