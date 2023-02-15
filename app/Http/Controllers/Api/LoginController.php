@@ -8,27 +8,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\LoginRequest;
+
 class LoginController extends Controller
 {
     //
 
-    public function login(Request $request){
+    public function login(LoginRequest $request){
 
         try {
 
 
 
-            $validator =   Validator::make($request->all(), [
-                'email' => 'required|email',
-                'password' => 'required',
-            ]);
-
-            if ($validator->fails()) {
-
-                $response['code'] = 1;
-                $response['error'] = $validator->errors()->first();
-                return response()->json($response,500);
-            }
+           
 
             $data = [
                 'email' => $request->email,

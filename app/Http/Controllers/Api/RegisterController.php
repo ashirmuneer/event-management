@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\RegistrationRequest;
 
 class RegisterController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -35,26 +38,18 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegistrationRequest $request)
     {
         //
 
         try {
 
-        $validator =   Validator::make($request->all(), [
-            'name' => 'required|min:4',
-            'email' => 'required|email|unique:users',
-            'user_type' => 'required',
-            'password' => 'required|min:6',
-            'company_name' => 'required_if:user_type,2'
-        ]);
+         
+   
 
-        if ($validator->fails()) {
+        
 
-            $response['code'] = 1;
-            $response['error'] = $validator->errors()->first();
-            return response()->json($response,500);
-        }
+
 
        $user = new User();
 
@@ -74,7 +69,7 @@ class RegisterController extends Controller
 
     } catch (\Illuminate\Database\QueryException $e) {
         $response['code'] = 3;
-        $response['message'] = 'Registration Failed';
+        $response['error'] = 'Registration Failed';
 
         return response()->json($response,500);
     }
